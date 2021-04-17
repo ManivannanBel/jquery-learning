@@ -1,0 +1,141 @@
+<html>
+  <head>
+    <title>jQuery learning | Events</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      body {
+        font-size: 17px;
+        font-family: arial;
+        background: #f4f4f4;
+        line-height: 1.5rem;
+      }
+      header {
+        background: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+        border-bottom: 4px #000 solid;
+        margin-bottom: 10px;
+      }
+      #container {
+        width: 90%;
+        margin: auto;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>JQuery crash course | Events</h1>
+    </header>
+    <div id="container">
+      <h3>Mouse events</h3>
+      <button id="btn1">Button 1</button>
+      <button id="btn2" class="btn-class">Button 2</button>
+      <h1 id="heading1">Heading one</h1>
+      <p id="para1">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque id
+        lectus luctus, condimentum sapien faucibus, bibendum ligula. In hac
+        habitasse platea dictumst. <span>Quisque ullamcorper</span> congue
+        consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </p>
+
+      <h2 id="coords"></h2>
+
+      <hr />
+      <form id="form">
+        <label>Name</label>
+        <input type="text" id="name" name="name" />
+        <br />
+        <label>Email</label>
+        <input type="text" id="email" name="email" />
+        <br />
+        <labe>Gender</labe>
+        <select id="gender" name="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+        <br />
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+    <script>
+      $(document).ready(function() {
+        // $("#btn1").click(function() {
+        //   alert("Button 1 clicked");
+        // });
+        // $("#btn1").on("click", function() {
+        //   $("#para1").toggle();
+        // });
+        // $("#btn2").on("click", function() {
+        //   $("#para1").show();
+        // });
+        // $("#btn1").dblclick(function() {
+        //   $("#para1").toggle();
+        // });
+        // $("#para1").hover(function(e) {
+        //   if (e.handleObj.origType === "mouseenter")
+        //     $("#para1").css("background-color", "yellow");
+        //   else $("#para1").css("background-color", "white");
+        // });
+        // $("#btn1").on("mouseenter", function() {
+        //   $("#para1").css("background-color", "green");
+        // });
+        // $("#btn1").on("mouseleave", function() {
+        //   $("#para1").css("background-color", "white");
+        // });
+        // $("#btn1").mousemove(function() {
+        //   $("#heading1").toggle();
+        // });
+        // $("#btn2").on("mousedown", function() {
+        //   $("#para1").toggle();
+        // });
+        // $("#btn2").on("mouseup", function() {
+        //   $("#para1").toggle();
+        // });
+
+        $("#btn2").click(function(e) {
+          console.log(e.currentTarget.id);
+          console.log(e.currentTarget.innerHTML);
+          console.log(e.currentTarget.outerHTML);
+          console.log(e.currentTarget.className);
+        });
+
+        $(document).mousemove(function(e) {
+          $("#coords").html("Coords: Y=" + e.clientY + " X=" + e.clientX);
+        });
+
+        // $("input").focus(function() {
+        //   alert("Focuss on!");
+        // });
+
+        $("input").focus(function() {
+          $(this).css("background-color", "yellow");
+        });
+
+        $("input").blur(function() {
+          $(this).css("background-color", "white");
+        });
+
+        $("input").keyup(function(e) {
+          console.log(e.target.value);
+        });
+
+        $("select#gender").change(function(e) {
+          console.log(e.target.value);
+          alert(e.target.value);
+        });
+
+        $("#form").submit(function(e) {
+          e.preventDefault();
+          var data = {
+            name: $("input#name").val(),
+            email: $("input#email").val(),
+            gender: $("select#gender").val()
+          };
+          console.log("submitted : " + JSON.stringify(data));
+        });
+      });
+    </script>
+  </body>
+</html>
